@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prisha Coaching Classes | Trusted Coaching in Jaipur</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#0E1116;
+  --ink-soft:#1C2028;
+  --accent:#1B4DFF;
+  --accent-dark:#163EE6;
+  --paper:#FFFFFF;
+  --paper-muted:#F5F7FA;
+  --line:#E2E6EB;
+  --text-muted:#6B7280;
+}
+
+/* MOBILE NAVBAR */
+.mobile-nav{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#ffffff;
+  border-bottom:1px solid #eee;
+}
+
+.nav-inner{
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 14px;
+}
+
+.icon-btn{
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+  color:#111;
+}
+
+.material-icons-outlined{
+  font-size:22px;
+}
+
+
+/* Logo */
+.logo img{
+  height:34px;
+  width:auto;
+}
+
+/* Right actions */
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.icon-btn{
+  background:none;
+  border:none;
+  font-size:20px;
+  cursor:pointer;
+  padding:6px;
+  color:#222;
+}
+
+/* Menu button emphasis */
+.menu-btn{
+  background:#f2f4f7;
+  border-radius:8px;
+  padding:6px 10px;
+}
+
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.6;
+}
+
+/* GLOBAL */
+.container{
+  width:92%;
+  max-width:1180px;
+  margin:auto;
+}
+
+a{text-decoration:none;color:inherit;}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 26px;
+  font-weight:600;
+  border-radius:10px;
+  transition:.25s ease;
+  cursor:pointer;
+}
+
+.btn-primary{
+  background:var(--accent);
+  color:white;
+  box-shadow:0 10px 25px rgba(27,77,255,.25);
+}
+
+.btn-primary:hover{
+  background:var(--accent-dark);
+  transform:translateY(-1px);
+}
+
+/* WhatsApp Button – Admission Focused */
+.btn-whatsapp{
+  background:#25D366;
+  color:#ffffff;
+  padding:14px 20px;          /* slightly shorter */
+  font-size:15px;
+  font-weight:600;
+  border-radius:10px;
+  box-shadow:0 8px 20px rgba(37,211,102,.35);
+}
+
+.btn-whatsapp:hover{
+  background:#1EBE5D;
+  transform:translateY(-1px);
+}
+
+
+/* NAV */
+nav{
+  background:rgba(255,255,255,.95);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.nav-wrap{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
+}
+
+.nav-logo{
+  font-size:20px;
+  font-weight:700;
+}
+
+.nav-links a{
+  margin-left:22px;
+  font-weight:500;
+  color:var(--ink-soft);
+}
+
+/* HERO */
+/* =====================
+   HERO SECTION
+===================== */
+
+/* =====================
+   HERO SECTION
+===================== */
+
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  background:url("demosm.png") no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+
+/* Desktop image swap */
+@media(min-width:768px){
+  .hero{
+    background:url("demo.png") no-repeat;
+    background-size:cover;
+    background-position:center right;
+    min-height:110vh;
+  }
+}
+
+/* Overlay for readability */
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(10,18,35,.78),
+      rgba(10,18,35,.55),
+      rgba(10,18,35,.25)
+    );
+}
+
+.hero-inner{
+  position:relative;
+  z-index:2;
+}
+
+.hero-content{
+  max-width:560px;
+  color:#fff;
+}
+
+/* Typography */
+.hero h1{
+  font-size:40px;
+  line-height:1.15;
+  letter-spacing:-0.8px;
+  margin-bottom:16px;
+}
+
+.hero-sub{
+  font-size:17px;
+  opacity:.95;
+  margin-bottom:14px;
+}
+
+.hero-proof{
+  font-size:14px;
+  opacity:.8;
+  margin-bottom:26px;
+}
+
+.hero-cta{
+  padding:16px 22px;
+  font-size:15px;
+}
+
+/* Mobile fine-tuning */
+@media(max-width:480px){
+  .hero h1{
+    font-size:32px;
+  }
+}
+
+
+
+/* TRUST */
+.trust{
+  background:var(--paper-muted);
+  padding:40px 0;
+}
+
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:20px;
+}
+
+.trust-card{
+  background:white;
+  padding:22px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  font-weight:600;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+}
+
+/* SECTIONS */
+.section{
+  padding:70px 0;
+}
+
+.section h2{
+  font-size:32px;
+  margin-bottom:14px;
+}
+
+.section p{
+  color:var(--text-muted);
+  max-width:720px;
+}
+
+/* COURSES */
+.cards{
+  display:grid;
+  gap:26px;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:28px;
+  border:1px solid var(--line);
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+.card h3{
+  font-size:20px;
+  margin-bottom:6px;
+}
+
+.course-for{
+  font-size:14px;
+  color:var(--text-muted);
+  margin-bottom:14px;
+}
+
+/* CTA STRIP */
+.cta-strip{
+  background:linear-gradient(135deg,#0E1116,#1C2340);
+  color:white;
+  padding:60px 0;
+  text-align:center;
+}
+
+.cta-strip p{
+  font-size:20px;
+  margin-bottom:20px;
+}
+
+/* NOTES */
+.notes-intro{
+  margin-bottom:20px;
+  color:var(--text-muted);
+}
+
+/* CONTACT */
+.contact-block p{
+  margin-bottom:8px;
+  font-weight:500;
+}
+
+form{
+  margin-top:28px;
+  max-width:420px;
+}
+
+input{
+  width:100%;
+  padding:14px 16px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  margin-bottom:12px;
+}
+
+.form-note{
+  font-size:13px;
+  color:var(--text-muted);
+  margin-top:8px;
+}
+
+/* FLOATING BUTTONS */
+.whatsapp-float{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  background:#25D366;
+  color:white;
+  padding:14px 18px;
+  border-radius:999px;
+  font-weight:600;
+  z-index:100;
+}
+
+/* Mobile view */
+@media(max-width:768px){
+
+  /* Show mobile navbar */
+  .mobile-nav{
+    display:block;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:white;
+    border-bottom:1px solid var(--line);
+  }
+
+  /* Hide desktop navbar */
+  nav{
+    display:none;
+  }
+
+  /* Text logo */
+  .logo-text{
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:-0.4px;
+    color:var(--ink);
+  }
+
+  /* Hero spacing fix */
+  .hero{
+    padding-top:120px;
+  }
+}
+
+/* Desktop view */
+@media(min-width:769px){
+  .mobile-nav{
+    display:none;
+  }
+}
+
+/* =========================
+   MOBILE SIDE MENU
+========================= */
+
+.menu-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:999;
+}
+
+.side-menu{
+  position:fixed;
+  top:0;
+  right:-280px;
+  width:280px;
+  height:100%;
+  background:white;
+  padding:24px;
+  box-shadow:-10px 0 30px rgba(0,0,0,.15);
+  transition:.35s ease;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.side-menu a{
+  font-size:16px;
+  font-weight:600;
+  color:var(--ink);
+}
+
+.side-menu a:hover{
+  color:var(--accent);
+}
+
+.menu-cta{
+  margin-top:auto;
+  background:var(--accent);
+  color:white;
+  padding:14px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:700;
+}
+
+.close-btn{
+  background:none;
+  border:none;
+  align-self:flex-end;
+  cursor:pointer;
+}
+
+/* ACTIVE STATES */
+body.menu-open .side-menu{
+  right:0;
+}
+
+body.menu-open .menu-overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+
+
+</style>
+</head>
+
+<body>
+<!-- MOBILE NAVBAR -->
+<header class="mobile-nav">
+  <div class="nav-inner">
+
+    <div class="logo-text">Prisha Coaching</div>
+
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Search">
+        <span class="material-icons-outlined">search</span>
+      </button>
+
+      <button class="icon-btn menu-btn" aria-label="Menu" onclick="openMenu()">
+        <span class="material-icons-outlined">menu</span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- MOBILE SIDE MENU -->
+<div class="menu-overlay" onclick="closeMenu()"></div>
+
+<aside class="side-menu">
+  <button class="close-btn" onclick="closeMenu()">
+    <span class="material-icons-outlined">close</span>
+  </button>
+
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#courses" onclick="closeMenu()">Courses</a>
+  <a href="#notes" onclick="closeMenu()">Notes</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+
+  <a class="menu-cta" href="https://wa.me/919414907613">
+    WhatsApp Enquiry
+  </a>
+</aside>
+
+
+
+<nav>
+  <div class="container nav-wrap">
+    <div class="nav-logo">Prisha Coaching</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#courses">Courses</a>
+      <a href="#notes">Notes</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-primary" href="https://wa.me/919414907613">WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-inner">
+    <div class="hero-content">
+
+      <h1>Trusted Coaching for Academic Success</h1>
+
+<p class="hero-sub">
+Clear teaching. Personal attention. Consistent results.
+</p>
+
+<p class="hero-proof">
+Trusted by parents across Jaipur
+</p>
+
+
+      <a class="btn btn-whatsapp" href="https://wa.me/919414907613">
+Enquire on WhatsApp
+</a>
+
+
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="trust">
+  <div class="container trust-grid">
+    <div class="trust-card">⭐ 4.8 Rating (30 Reviews)</div>
+    <div class="trust-card">📍 C-40, Jaipur</div>
+    <div class="trust-card">🕒 Opens at 4:00 PM</div>
+    <div class="trust-card">📞 094149 07613</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>About Prisha Coaching Classes</h2>
+    <p>
+      Prisha Coaching Classes is a trusted local coaching institute in Jaipur,
+      focused on disciplined study habits, conceptual clarity, and individual
+      attention for every student.
+    </p>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <div class="container">
+    <p>Unsure which course is right for your child?</p>
+    <a class="btn btn-primary" href="https://wa.me/919414907613">Talk to Us on WhatsApp</a>
+  </div>
+</section>
+
+<section class="section" id="courses">
+  <div class="container">
+    <h2>Our Courses</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Class 10 Foundation Course</h3>
+        <p class="course-for">For students building strong academic basics</p>
+        <p>Duration: 6 Months</p>
+        <a class="btn btn-primary" href="https://wa.me/919414907613">Enquire</a>
+      </div>
+      <div class="card">
+        <h3>Class 12 Board Preparation</h3>
+        <p class="course-for">Focused preparation for board exams</p>
+        <p>Duration: 1 Year</p>
+        <a class="btn btn-primary" href="https://wa.me/919414907613">Enquire</a>
+      </div>
+      <div class="card">
+        <h3>Competitive Exam Basics</h3>
+        <p class="course-for">Early foundation for competitive exams</p>
+        <p>Duration: 4 Months</p>
+        <a class="btn btn-primary" href="https://wa.me/919414907613">Enquire</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="notes">
+  <div class="container">
+    <h2>Study Notes</h2>
+    <p class="notes-intro">
+      We believe quality notes build strong understanding.  
+      Here’s a sample of how we teach.
+    </p>
+    <div class="card">
+      <h3>Sample Mathematics Notes</h3>
+      <p>Chapter-wise explanation (Demo PDF)</p>
+      <a class="btn btn-primary" href="sample-notes.pdf" download>Download Notes</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container">
+    <h2>Contact & Enquiry</h2>
+    <div class="contact-block">
+      <p>📍 C-40, Jaipur</p>
+      <p>📞 094149 07613</p>
+      <p>🕒 Opens at 4:00 PM</p>
+      <p>⭐ 4.8 Rating</p>
+    </div>
+
+    <form onsubmit="event.preventDefault();alert('Thank you, we will contact you shortly');">
+      <input type="text" placeholder="Parent / Student Name" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <button class="btn btn-primary" type="submit">Send Enquiry</button>
+      <p class="form-note">We usually respond within a few hours.</p>
+    </form>
+  </div>
+</section>
+
+<a class="whatsapp-float" href="https://wa.me/919414907613">WhatsApp</a>
+
+<script>
+function openMenu(){
+  document.body.classList.add('menu-open');
+}
+
+function closeMenu(){
+  document.body.classList.remove('menu-open');
+}
+</script>
+
+</body>
+</html>
