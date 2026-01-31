@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Courses | Prisha Coaching Classes</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+  <style>
+  /* --- same visual system as main site (kept consistent) --- */
+  :root{
+    --ink:#0E1116;
+    --ink-soft:#1C2028;
+    --accent:#1B4DFF;
+    --accent-dark:#163EE6;
+    --paper:#FFFFFF;
+    --paper-muted:#F5F7FA;
+    --line:#E2E6EB;
+    --text-muted:#6B7280;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+  .container{width:92%;max-width:1180px;margin:auto}
+  a{text-decoration:none;color:inherit}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;font-weight:600;border-radius:10px;cursor:pointer}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-whatsapp{background:#25D366;color:#fff;padding:12px 16px;border-radius:10px;font-weight:700}
+
+  /* NAV / mobile header */
+  .mobile-nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--line)}
+  .nav-inner{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 14px}
+  .logo-text{font-weight:700;font-size:18px;color:var(--ink)}
+  .icon-btn{background:none;border:none;cursor:pointer;padding:6px;color:#222;font-size:20px}
+  .material-icons-outlined{font-size:22px}
+  .menu-btn{background:#f2f4f7;border-radius:8px;padding:6px 10px}
+
+  /* desktop nav (hidden on small screens) */
+  nav{background:rgba(255,255,255,.95);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+  .nav-wrap{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+  .nav-logo{font-size:20px;font-weight:700}
+  .nav-links a{margin-left:22px;font-weight:500;color:var(--ink-soft)}
+
+  /* Search bar */
+  .mobile-search{position:sticky;top:52px;z-index:999;background:#fff;border-bottom:1px solid var(--line);padding:10px 14px;display:none}
+  .search-wrap{display:flex;gap:10px}
+  .mobile-search input{flex:1;height:42px;border-radius:10px;border:1px solid #ddd;padding:0 12px}
+  .search-btn{width:42px;height:42px;border-radius:10px;border:none;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center}
+
+  /* Content */
+  .section{padding:70px 0}
+  .section h2{font-size:28px;margin-bottom:8px}
+  .notes-intro{color:var(--text-muted);margin-bottom:20px}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+  .card{background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:0 8px 20px rgba(0,0,0,.04)}
+  .card h3{font-size:18px;margin-bottom:6px}
+  .course-for{font-size:13px;color:var(--text-muted);margin-bottom:10px}
+
+  /* Side menu */
+  .menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.25s;z-index:999}
+  .side-menu{position:fixed;top:0;right:-320px;width:280px;max-width:85%;height:100%;background:#fff;padding:20px;box-shadow:-10px 0 30px rgba(0,0,0,.12);transition:.35s ease;z-index:1000;display:flex;flex-direction:column;gap:14px}
+  .side-menu a{font-weight:600;color:var(--ink)}
+  .menu-cta{margin-top:auto;background:#25D366;color:#fff;padding:12px;border-radius:12px;text-align:center;font-weight:700}
+
+  body.menu-open .side-menu{right:0}
+  body.menu-open .menu-overlay{opacity:1;pointer-events:auto}
+
+  .whatsapp-float{position:fixed;right:18px;bottom:18px;background:#25D366;color:#fff;padding:12px 14px;border-radius:999px;font-weight:700;z-index:100}
+
+  @media(min-width:769px){.mobile-nav{display:none}}
+  @media(max-width:768px){nav{display:none}}
+  
+  /* Course card enhancements (keeps original look) */
+.course-cover{
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:14px;
+  background:#E9EDF3;
+}
+
+.course-cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.course-desc{
+  font-size:14px;
+  color:var(--ink-soft);
+  margin:8px 0 12px;
+}
+
+
+  </style>
+</head>
+
+<body>
+  <!-- MOBILE NAVBAR (same as main site) -->
+  <header class="mobile-nav">
+    <div class="nav-inner">
+      <div class="logo-text">Prisha Coaching</div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="openSearchBtn" aria-label="Search"><span class="material-icons-outlined">search</span></button>
+        <button class="icon-btn menu-btn" id="openMenuBtn" aria-label="Menu"><span class="material-icons-outlined">menu</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- mobile search -->
+  <div class="mobile-search" id="mobileSearch">
+    <div class="search-wrap">
+      <input type="search" id="searchInput" placeholder="Search courses, notes…" aria-label="Search" />
+      <button class="search-btn" id="runSearchBtn" aria-label="Run search"><span class="material-icons-outlined">search</span></button>
+    </div>
+  </div>
+
+  <!-- overlay + side menu (shared with main site) -->
+  <div class="menu-overlay" id="menuOverlay" tabindex="-1"></div>
+  <aside class="side-menu" id="sideMenu" aria-hidden="true">
+    <button class="icon-btn close-menu" id="closeMenuBtn" aria-label="Close menu"><span class="material-icons-outlined">close</span></button>
+    <a href="index.html">Home</a>
+    <a href="courses.html">Courses</a>
+    <a href="notes.html">Notes</a>
+    <a href="contact.html">Contact</a>
+    <a class="menu-cta" href="https://wa.me/919414907613">WhatsApp Enquiry</a>
+  </aside>
+
+  <!-- desktop nav (same structure as main site) -->
+  <nav>
+    <div class="container nav-wrap">
+      <div class="nav-logo">Prisha Coaching</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="notes.html">Notes</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <h2>Our Courses</h2>
+      <p class="notes-intro">Structured programs for strong fundamentals & exam success.</p>
+<div class="cards">
+
+  <!-- Course 1 -->
+  <article class="card searchable">
+    <div class="course-cover">
+      <img src="Dummy cover for courses..png" alt="Class 6–8 Foundation Course">
+    </div>
+    <h3>Class 6–8 Foundation Program</h3>
+    <p class="course-for">Strong academic base</p>
+    <p class="course-desc">
+      Concept-focused learning in Maths & Science to build clarity,
+      confidence, and problem-solving skills from an early stage.
+    </p>
+    <p>Duration: 1 Year</p>
+    <p style="margin-top:14px">
+      <a class="btn btn-primary" href="https://wa.me/919414907613">Enroll Now</a>
+    </p>
+  </article>
+
+  <!-- Course 2 -->
+  <article class="card searchable">
+    <div class="course-cover">
+      <img src="Dummy cover for courses..png" alt="Class 9 Complete Course">
+    </div>
+    <h3>Class 9 Complete Course</h3>
+    <p class="course-for">CBSE / State Board</p>
+    <p class="course-desc">
+      Complete syllabus coverage with weekly tests, doubt sessions,
+      and exam-oriented preparation.
+    </p>
+    <p>Duration: 1 Year</p>
+    <p style="margin-top:14px">
+      <a class="btn btn-primary" href="https://wa.me/919414907613">Enroll Now</a>
+    </p>
+  </article>
+
+  <!-- Course 3 -->
+  <article class="card searchable">
+    <div class="course-cover">
+      <img src="Dummy cover for courses..png" alt="Class 10 Board Preparation">
+    </div>
+    <h3>Class 10 Board Excellence</h3>
+    <p class="course-for">Board-focused</p>
+    <p class="course-desc">
+      Intensive preparation with chapter-wise tests, previous year
+      questions, and revision strategies.
+    </p>
+    <p>Duration: 6 Months</p>
+    <p style="margin-top:14px">
+      <a class="btn btn-primary" href="https://wa.me/919414907613">Enroll Now</a>
+    </p>
+  </article>
+
+  <!-- Course 4 -->
+  <article class="card searchable">
+    <div class="course-cover">
+      <img src="Dummy cover for courses..png" alt="Class 11 PCM">
+    </div>
+    <h3>Class 11 PCM Core</h3>
+    <p class="course-for">Physics • Chemistry • Maths</p>
+    <p class="course-desc">
+      Deep conceptual teaching aligned with school exams and
+      competitive exam foundations.
+    </p>
+    <p>Duration: 1 Year</p>
+    <p style="margin-top:14px">
+      <a class="btn btn-primary" href="https://wa.me/919414907613">Enroll Now</a>
+    </p>
+  </article>
+
+  <!-- Course 5 -->
+  <article class="card searchable">
+    <div class="course-cover">
+      <img src="Dummy cover for courses..png" alt="Class 12 PCM">
+    </div>
+    <h3>Class 12 PCM Advanced</h3>
+    <p class="course-for">Boards + Competitive</p>
+    <p class="course-desc">
+      Structured learning with exam-level problems, mock tests,
+      and performance analysis.
+    </p>
+    <p>Duration: 1 Year</p>
+    <p style="margin-top:14px">
+      <a class="btn btn-primary" href="https://wa.me/919414907613">Enroll Now</a>
+    </p>
+  </article>
+
+  <!-- Course 6 -->
+  <article class="card searchable">
+    <div class="course-cover">
+      <img src="Dummy cover for courses..png" alt="Class 12 Crash Course">
+    </div>
+    <h3>Class 12 Crash Course</h3>
+    <p class="course-for">Fast revision</p>
+    <p class="course-desc">
+      Rapid syllabus completion with重点 topics, formula revision,
+      and exam-ready practice.
+    </p>
+    <p>Duration: 4 Months</p>
+    <p style="margin-top:14px">
+      <a class="btn btn-primary" href="https://wa.me/919414907613">Enroll Now</a>
+    </p>
+  </article>
+
+  <!-- Course 7 -->
+  <article class="card searchable">
+    <div class="course-cover">
+      <img src="Dummy cover for courses..png" alt="NTSE Preparation">
+    </div>
+    <h3>NTSE Preparation Program</h3>
+    <p class="course-for">Competitive exams</p>
+    <p class="course-desc">
+      Focused training for MAT & SAT with analytical reasoning
+      and concept strengthening.
+    </p>
+    <p>Duration: 6 Months</p>
+    <p style="margin-top:14px">
+      <a class="btn btn-primary" href="https://wa.me/919414907613">Enroll Now</a>
+    </p>
+  </article>
+
+  <!-- Course 8 -->
+  <article class="card searchable">
+    <div class="course-cover">
+      <img src="Dummy cover for courses..png" alt="Olympiad Training">
+    </div>
+    <h3>Maths & Science Olympiad</h3>
+    <p class="course-for">Merit programs</p>
+    <p class="course-desc">
+      Advanced problem-solving techniques designed for national
+      and international Olympiads.
+    </p>
+    <p>Duration: 5 Months</p>
+    <p style="margin-top:14px">
+      <a class="btn btn-primary" href="https://wa.me/919414907613">Enroll Now</a>
+    </p>
+  </article>
+
+  <!-- Course 9 -->
+  <article class="card searchable">
+    <div class="course-cover">
+      <img src="Dummy cover for courses..png" alt="Doubt Solving Sessions">
+    </div>
+    <h3>Personal Doubt Solving Sessions</h3>
+    <p class="course-for">1-to-1 support</p>
+    <p class="course-desc">
+      Dedicated sessions for weak areas, homework support,
+      and concept reinforcement.
+    </p>
+    <p>Duration: Flexible</p>
+    <p style="margin-top:14px">
+      <a class="btn btn-primary" href="https://wa.me/919414907613">Enroll Now</a>
+    </p>
+  </article>
+
+  <!-- Course 10 -->
+  <article class="card searchable">
+    <div class="course-cover">
+      <img src="Dummy cover for courses..png" alt="Exam Strategy Course">
+    </div>
+    <h3>Exam Strategy & Revision Bootcamp</h3>
+    <p class="course-for">Final preparation</p>
+    <p class="course-desc">
+      Learn time management, smart revision, and scoring strategies
+      before final examinations.
+    </p>
+    <p>Duration: 2 Months</p>
+    <p style="margin-top:14px">
+      <a class="btn btn-primary" href="https://wa.me/919414907613">Enroll Now</a>
+    </p>
+  </article>
+
+</div>
+
+
+    </div>
+  </section>
+
+  <a class="whatsapp-float" href="https://wa.me/919414907613" aria-label="WhatsApp">WhatsApp</a>
+
+  <script>
+  (function(){
+    // Elements — mirrors main site's script so behaviour is identical
+    const body = document.body;
+    const openMenuBtn = document.getElementById('openMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const sideMenu = document.getElementById('sideMenu');
+
+    const openSearchBtn = document.getElementById('openSearchBtn');
+    const mobileSearch = document.getElementById('mobileSearch');
+    const searchInput = document.getElementById('searchInput');
+    const runSearchBtn = document.getElementById('runSearchBtn');
+
+    function openMenu(){ body.classList.add('menu-open'); sideMenu.setAttribute('aria-hidden','false'); }
+    function closeMenu(){ body.classList.remove('menu-open'); sideMenu.setAttribute('aria-hidden','true'); }
+
+    openMenuBtn && openMenuBtn.addEventListener('click', openMenu);
+    closeMenuBtn && closeMenuBtn.addEventListener('click', closeMenu);
+    menuOverlay && menuOverlay.addEventListener('click', closeMenu);
+
+    function toggleSearch(){
+      if(!mobileSearch) return;
+      mobileSearch.style.display = mobileSearch.style.display === 'block' ? 'none' : 'block';
+      if(mobileSearch.style.display === 'block' && searchInput) searchInput.focus();
+    }
+    openSearchBtn && openSearchBtn.addEventListener('click', toggleSearch);
+
+    document.addEventListener('click', e => {
+      const isClickInsideSearch = e.target.closest('.mobile-search');
+      const isSearchButton = e.target.closest('#openSearchBtn');
+      if(!isClickInsideSearch && !isSearchButton){ if(mobileSearch) mobileSearch.style.display = 'none'; }
+    });
+
+    document.addEventListener('keydown', e => { if(e.key === 'Escape'){ if(mobileSearch) mobileSearch.style.display = 'none'; closeMenu(); } });
+
+    function runSearch(){
+      const q = (searchInput.value || '').toLowerCase().trim();
+      const items = document.querySelectorAll('.searchable');
+      if(!q){ items.forEach(i=>i.style.display=''); return; }
+      let found=false;
+      items.forEach(item=>{
+        if(item.innerText.toLowerCase().includes(q)){ item.style.display=''; found=true } else { item.style.display='none' }
+      });
+      if(found){ const first = Array.from(items).find(i=>i.style.display !== 'none'); if(first) first.scrollIntoView({behavior:'smooth', block:'start'}); }
+      else alert('No results found');
+      if(mobileSearch) mobileSearch.style.display='none';
+    }
+
+    runSearchBtn && runSearchBtn.addEventListener('click', runSearch);
+    searchInput && searchInput.addEventListener('keydown', e => { if(e.key === 'Enter') runSearch(); });
+
+  })();
+  </script>
+</body>
+</html>

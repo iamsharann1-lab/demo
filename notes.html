@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notes | Prisha Coaching Classes</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#0E1116;
+  --ink-soft:#1C2028;
+  --accent:#1B4DFF;
+  --accent-dark:#163EE6;
+  --paper:#FFFFFF;
+  --paper-muted:#F5F7FA;
+  --line:#E2E6EB;
+  --text-muted:#6B7280;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',sans-serif;
+  background:#fff;
+  color:var(--ink);
+  line-height:1.6;
+}
+
+.container{width:92%;max-width:1180px;margin:auto}
+a{text-decoration:none;color:inherit}
+
+/* ================= MOBILE HEADER ================= */
+
+.mobile-nav{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+
+.nav-inner{
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 14px;
+}
+
+.logo-text{
+  font-size:18px;
+  font-weight:700;
+}
+
+.nav-actions{
+  display:flex;
+  gap:14px;
+}
+
+.icon-btn{
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+}
+
+.material-icons-outlined{font-size:22px}
+
+.menu-btn{
+  background:#f2f4f7;
+  border-radius:8px;
+  padding:6px 10px;
+}
+
+/* ================= MOBILE SEARCH ================= */
+
+.mobile-search{
+  position:sticky;
+  top:52px;
+  z-index:999;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  padding:10px 14px;
+  display:none;
+}
+
+.mobile-search input{
+  width:100%;
+  height:42px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  padding:0 14px;
+  font-size:15px;
+}
+
+/* ================= DESKTOP NAV ================= */
+
+nav{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.nav-wrap{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
+}
+
+.nav-logo{
+  font-size:20px;
+  font-weight:700;
+}
+
+.nav-links a{
+  margin-left:22px;
+  font-weight:500;
+  color:var(--ink-soft);
+}
+
+/* ================= CONTENT ================= */
+
+.section{
+  padding:70px 0;
+}
+
+.section h2{
+  font-size:32px;
+  margin-bottom:14px;
+}
+
+.notes-intro{
+  color:var(--text-muted);
+  margin-bottom:20px;
+}
+
+.cards{
+  display:grid;
+  gap:26px;
+  /* small enhancement: responsive columns for a notes grid */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* preserve original card feel while supporting visuals */
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:20px 20px 24px; /* slightly tighter so cover fits nicely */
+  border:1px solid var(--line);
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.card h3{font-size:18px;margin-bottom:0}
+.course-for{font-size:13px;color:var(--text-muted);margin-bottom:6px}
+
+/* --- NEW: note cover + desc (non-intrusive, keeps your visual system) --- */
+.note-cover{
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:10px;
+  overflow:hidden;
+  background:var(--paper-muted);
+  flex-shrink:0;
+}
+
+.note-cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.note-desc{
+  font-size:14px;
+  color:var(--ink-soft);
+  margin-top:6px;
+  flex-grow:1;
+}
+
+/* keep CTA layout consistent with your .btn styles */
+.btn{
+  display:inline-flex;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:600;
+  align-items:center;
+  justify-content:center;
+}
+
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+}
+
+/* ================= SIDE MENU ================= */
+
+.menu-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:999;
+}
+
+.side-menu{
+  position:fixed;
+  top:0;
+  right:-280px;
+  width:280px;
+  height:100%;
+  background:#fff;
+  padding:24px;
+  box-shadow:-10px 0 30px rgba(0,0,0,.15);
+  transition:.35s ease;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.side-menu a{
+  font-weight:600;
+}
+
+.menu-cta{
+  margin-top:auto;
+  background:#25D366;
+  color:#fff;
+  padding:14px;
+  border-radius:12px;
+  text-align:center;
+  font-weight:700;
+}
+
+body.menu-open .side-menu{right:0}
+body.menu-open .menu-overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+  nav{display:none}
+}
+
+@media(min-width:769px){
+  .mobile-nav,.mobile-search{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<!-- MOBILE HEADER -->
+<header class="mobile-nav">
+  <div class="nav-inner">
+    <div class="logo-text">Prisha Coaching</div>
+    <div class="nav-actions">
+      <button class="icon-btn" onclick="toggleSearch()">
+        <span class="material-icons-outlined">search</span>
+      </button>
+      <button class="icon-btn menu-btn" onclick="openMenu()">
+        <span class="material-icons-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-search" id="mobileSearch">
+  <input id="searchInput" placeholder="Search notes…" />
+</div>
+
+<!-- DESKTOP NAV -->
+<nav>
+  <div class="container nav-wrap">
+    <div class="nav-logo">Prisha Coaching</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="notes.html">Notes</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- NOTES -->
+<section class="section">
+  <div class="container">
+    <h2>Study Notes</h2>
+    <p class="notes-intro">Chapter-wise PDFs designed for clarity & exam focus.</p>
+
+    <div class="cards">
+      <!-- Note 01 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Class 9 Maths - Number Systems">
+        </div>
+        <h3>Class 9 — Number Systems</h3>
+        <p class="course-for">Chapter-wise PDF</p>
+        <p class="note-desc">Concise theory, solved examples and practice questions covering number systems with tips for exams.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-01.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 02 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Class 9 Algebra">
+        </div>
+        <h3>Class 9 — Algebra</h3>
+        <p class="course-for">Chapter-wise PDF</p>
+        <p class="note-desc">Theory + solved problems on polynomials, factorization and equations for steady practice.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-02.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 03 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Class 10 Physics - Motion">
+        </div>
+        <h3>Class 10 — Motion</h3>
+        <p class="course-for">Theory & Numericals</p>
+        <p class="note-desc">Clear concepts, formula sheet and step-by-step numericals on motion and laws.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-03.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 04 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Class 10 Chemistry - Chemical Reactions">
+        </div>
+        <h3>Class 10 — Chemical Reactions</h3>
+        <p class="course-for">Board focused</p>
+        <p class="note-desc">Key reactions, equations, and previous-year questions curated for board prep.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-04.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 05 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Class 11 Physics - Kinematics">
+        </div>
+        <h3>Class 11 — Kinematics (Physics)</h3>
+        <p class="course-for">Concept + Examples</p>
+        <p class="note-desc">Concise concept notes with solved examples and shortcuts for quick revision.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-05.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 06 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Class 11 Chemistry - Basic Concepts">
+        </div>
+        <h3>Class 11 — Basic Chemistry Concepts</h3>
+        <p class="course-for">Foundation notes</p>
+        <p class="note-desc">Atom, molecule, stoichiometry and periodic table notes with solved problems.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-06.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 07 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Class 12 Maths - Calculus">
+        </div>
+        <h3>Class 12 — Calculus Quick Notes</h3>
+        <p class="course-for">Revision pack</p>
+        <p class="note-desc">Essential formulas, solved examples and tricks for differentiation and integration.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-07.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 08 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Class 12 Physics - Electromagnetism">
+        </div>
+        <h3>Class 12 — Electromagnetism</h3>
+        <p class="course-for">Theory + Problems</p>
+        <p class="note-desc">Concise concept maps and solved problems to master electromagnetism topics.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-08.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 09 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Class 12 Chemistry - Organic">
+        </div>
+        <h3>Class 12 — Organic Chemistry</h3>
+        <p class="course-for">Reaction mechanisms</p>
+        <p class="note-desc">Summarised mechanisms, important reactions and problem sets for quick practice.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-09.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 10 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="NTSE - MAT & SAT">
+        </div>
+        <h3>NTSE — MAT & SAT Practice</h3>
+        <p class="course-for">Competitive</p>
+        <p class="note-desc">Question bank and solved papers to build speed and accuracy for NTSE stages.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-10.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 11 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Olympiad - Problem Set">
+        </div>
+        <h3>Olympiad — Maths Problem Set</h3>
+        <p class="course-for">Advanced problems</p>
+        <p class="note-desc">Challenging problems with hints and solutions for Olympiad aspirants.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-11.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+      <!-- Note 12 -->
+      <article class="card searchable">
+        <div class="note-cover">
+          <img src="Dummy cover for notes.png" alt="Doubt Solving — Worksheets">
+        </div>
+        <h3>Doubt Solving — Worksheets</h3>
+        <p class="course-for">Practice & revision</p>
+        <p class="note-desc">Mixed worksheets covering common weak areas for focused practice and improvement.</p>
+        <div>
+          <a class="btn btn-primary" href="notes/notes-12.pdf" download>Download PDF</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- SIDE MENU -->
+<div class="menu-overlay" onclick="closeMenu()"></div>
+
+<aside class="side-menu">
+  <a href="index.html">Home</a>
+  <a href="courses.html">Courses</a>
+  <a href="notes.html">Notes</a>
+  <a href="contact.html">Contact</a>
+
+  <a class="menu-cta" href="https://wa.me/919414907613">
+    WhatsApp Enquiry
+  </a>
+</aside>
+
+<script>
+function openMenu(){document.body.classList.add('menu-open')}
+function closeMenu(){document.body.classList.remove('menu-open')}
+
+function toggleSearch(){
+  const s=document.getElementById('mobileSearch')
+  s.style.display=s.style.display==='block'?'none':'block'
+}
+
+/* Existing search — unchanged behaviour */
+document.getElementById('searchInput').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase()
+  document.querySelectorAll('.searchable').forEach(card=>{
+    card.style.display = card.innerText.toLowerCase().includes(q) ? '' : 'none'
+  })
+})
+</script>
+
+</body>
+</html>
